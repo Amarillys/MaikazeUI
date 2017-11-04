@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="头文件\SDL">
+      <UniqueIdentifier>{f05dc240-6967-4863-920f-0ce594bfe603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\Core">
+      <UniqueIdentifier>{4d9f1d7d-883d-4d0d-9d5f-4e01a58d080e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Core">
+      <UniqueIdentifier>{87d445cd-7ea0-4826-b04d-c7c4bdb51572}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="demo.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="core\window.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\init.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\ask.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\button.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\check.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\combo.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\frame.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\label.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\line.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\list.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\menu.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\msg.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\process.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\slider.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\status.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\textbox.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\sdl\SDL.h">
+      <Filter>头文件\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\window.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\init.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\ask.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\button.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\check.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\combo.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\frame.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\label.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\line.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\list.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\menu.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\msg.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\process.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\slider.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\status.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\textbox.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
