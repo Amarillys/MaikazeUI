@@ -4,13 +4,5 @@
 
 Object::Object()
 {
-
-}
-
-Object::~Object()
-{}
-
-void Object::Draw()
-{
-
+    id = reinterpret_cast<u32>(this);
 }
