@@ -5,22 +5,26 @@
 
 #include "base.h"
 
+class Win;
 class Object
 {
 public:
     Object();
-    virtual void Draw() = 0;
-    virtual void Show() = 0;
-    virtual void Hide() = 0;
-
+    virtual void Draw();
+    virtual void Show();
+    virtual void Hide();
+    void Set(Win* iwin);
+    Win* GetFather();
     //paiting priority
     u32 priority = 0;
     bool shown = true;
     
-    u32 getid() { return id; }
+    u32 getid();
 
 private:
     u32 id = 0;
+    bool set = false;
+    Win* father;
 };
 
 #endif // !MKZ_OBJECT_H_

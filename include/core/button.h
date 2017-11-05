@@ -3,6 +3,7 @@
 #ifndef MKZ_BUTTON_H_
 #define MKZ_BUTTON_H_
 
+#include "font.h"
 #include "window.h"
 #include "object.h"
 
@@ -15,10 +16,10 @@ public:
 
     void Draw();
 
-    Button();
+    Button(Win* iwin, int ix, int iy, int iw, int ih);
     ~Button();
 
-    u32 w, h;
+    u32 w, h, x, y;
     stdstr text;
     u32 textsize;
     
@@ -28,8 +29,7 @@ public:
 
 
 private:
-    Win* father;
-    
+    SDL_Surface* sur;
 };
 
 

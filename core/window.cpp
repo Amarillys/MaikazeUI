@@ -62,13 +62,28 @@ void Win::Hide()
     SDL_HideWindow(win);
 }
 
+void Win::Add(Object* iobj)
+{
+    
+}
+
+SDL_Renderer* Win::GetRen()
+{
+    return ren;
+}
+
 void Win::Draw()
 {
     Fill(sur, bgcolor);
-    Refresh(ren, sur);
+    Refresh(ren, sur, SDL_Rect{ 0, 0, w, h }, SDL_Rect{ 0, 0, w, h });
 }
 
 void Win::SetTitle(stdstr ititle)
 {
     SDL_SetWindowTitle(win, ititle.c_str());
+}
+
+Color Win::GetBgColor()
+{
+    return bgcolor;
 }

@@ -4,7 +4,7 @@
 #ifndef  MKZ_WIN_H_
 #define MKZ_WIN_H_
 
-#include "base.h"
+#include "object.h"
 
 class Win 
 {
@@ -15,11 +15,13 @@ public:
     Win(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags);
     //Win(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags, bool show);
 
+    void Add(Object* iobj);
+    SDL_Renderer * GetRen();
     void Draw();
     void Show();
     void Hide();
     void SetTitle(stdstr ititle);
-
+    Color GetBgColor();
     ~Win();
 
 
