@@ -13,6 +13,7 @@ public:
     virtual void Draw();
     virtual void Show();
     virtual void Hide();
+    virtual void Rec();
     void Set(Win* iwin);
     Win* GetFather();
     //paiting priority

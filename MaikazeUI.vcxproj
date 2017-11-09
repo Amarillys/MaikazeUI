@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)MaikazeUI/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -119,7 +119,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2main.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -134,7 +134,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2_ttf.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)MaikazeUI/lib/x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -144,38 +144,47 @@
     <ClCompile Include="core\button.cpp" />
     <ClCompile Include="core\check.cpp" />
     <ClCompile Include="core\combo.cpp" />
+    <ClCompile Include="core\event.cpp" />
+    <ClCompile Include="core\font.cpp" />
     <ClCompile Include="core\frame.cpp" />
-    <ClCompile Include="core\init.cpp" />
+    <ClCompile Include="core\base.cpp" />
     <ClCompile Include="core\label.cpp" />
     <ClCompile Include="core\line.cpp" />
     <ClCompile Include="core\list.cpp" />
     <ClCompile Include="core\menu.cpp" />
     <ClCompile Include="core\msg.cpp" />
+    <ClCompile Include="core\object.cpp" />
     <ClCompile Include="core\process.cpp" />
     <ClCompile Include="core\slider.cpp" />
     <ClCompile Include="core\status.cpp" />
     <ClCompile Include="core\textbox.cpp" />
     <ClCompile Include="core\window.cpp" />
     <ClCompile Include="demo.cpp" />
+    <ClCompile Include="demo\mainwin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\ask.h" />
     <ClInclude Include="include\core\button.h" />
     <ClInclude Include="include\core\check.h" />
     <ClInclude Include="include\core\combo.h" />
+    <ClInclude Include="include\core\event.h" />
+    <ClInclude Include="include\core\font.h" />
     <ClInclude Include="include\core\frame.h" />
-    <ClInclude Include="include\core\init.h" />
+    <ClInclude Include="include\core\base.h" />
     <ClInclude Include="include\core\label.h" />
     <ClInclude Include="include\core\line.h" />
     <ClInclude Include="include\core\list.h" />
     <ClInclude Include="include\core\menu.h" />
     <ClInclude Include="include\core\msg.h" />
+    <ClInclude Include="include\core\object.h" />
     <ClInclude Include="include\core\process.h" />
     <ClInclude Include="include\core\slider.h" />
     <ClInclude Include="include\core\status.h" />
     <ClInclude Include="include\core\textbox.h" />
     <ClInclude Include="include\core\window.h" />
+    <ClInclude Include="include\demo\mainwin.h" />
     <ClInclude Include="include\sdl\SDL.h" />
+    <ClInclude Include="include\sdl\SDL_ttf.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

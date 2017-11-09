@@ -14,6 +14,7 @@ Initilizer v0.01
 using stdstr = std::string;
 using u32 = Uint32;
 
+const int REFRESHTIME = 30;
 const int CircleDevide = 56;
 void init(u32 flags); 
 

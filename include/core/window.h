@@ -5,6 +5,7 @@
 #define MKZ_WIN_H_
 
 #include "object.h"
+#include "event.h"
 
 class Win 
 {
@@ -20,8 +21,11 @@ public:
     void Draw();
     void Show();
     void Hide();
+    void EvtRec(EVT ievt);
+    SDL_Window* Win::GetWin();
     void SetTitle(stdstr ititle);
     Color GetBgColor();
+    int GetID();
     ~Win();
 
 
@@ -29,7 +33,11 @@ private:
     SDL_Window* win;
     SDL_Renderer * ren;
     SDL_Surface* sur;
+    
+    //the status for the focus object.
+    int newobj, curobj;
 
+    int id;
     stdstr title;
     int x, y, w, h;
     bool imgbg;

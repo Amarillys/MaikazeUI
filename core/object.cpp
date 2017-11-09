@@ -19,6 +19,10 @@ void Object::Hide()
 {
 }
 
+void Object::Rec()
+{
+}
+
 void Object::Set(Win * iwin)
 {
     if (!set)

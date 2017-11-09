@@ -33,14 +33,11 @@ void Win::Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags)
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
-
-    win = SDL_CreateWindow(ititle.c_str(),
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        iw, ih, SDL_WINDOW_SHOWN);
+    
+    win = SDL_CreateWindow(ititle.c_str(), ix, iy, iw, ih, SDL_WINDOW_SHOWN);
     ren = SDL_CreateRenderer(win, -1, 0);
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
-
+    id = SDL_GetWindowID(win);
     Draw();
     printf("Window %s Created.", SDL_GetWindowTitle(win));
 }
@@ -60,6 +57,17 @@ void Win::Show()
 void Win::Hide()
 {
     SDL_HideWindow(win);
+}
+
+void Win::EvtRec(EVT ievt)
+{
+    printf("rec command: %d %d on Window %d\n", ievt.x, ievt.y, id);
+}
+
+
+SDL_Window* Win::GetWin()
+{
+    return win;
 }
 
 void Win::Add(Object* iobj)
@@ -86,4 +94,9 @@ void Win::SetTitle(stdstr ititle)
 Color Win::GetBgColor()
 {
     return bgcolor;
+}
+
+int Win::GetID()
+{
+    return id;
 }

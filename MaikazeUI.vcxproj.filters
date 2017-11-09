@@ -22,15 +22,18 @@
     <Filter Include="源文件\Core">
       <UniqueIdentifier>{87d445cd-7ea0-4826-b04d-c7c4bdb51572}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\Demo">
+      <UniqueIdentifier>{b59eeb86-b65e-460b-8e3e-f8bf05445ef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Demo">
+      <UniqueIdentifier>{bcb3c51c-2bdc-4f1b-9e99-d44bc8448be1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="demo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="core\window.cpp">
-      <Filter>源文件\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="core\init.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
     <ClCompile Include="core\ask.cpp">
@@ -75,15 +78,27 @@
     <ClCompile Include="core\textbox.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
+    <ClCompile Include="core\object.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\base.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\font.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="demo\mainwin.cpp">
+      <Filter>源文件\Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="core\event.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\sdl\SDL.h">
       <Filter>头文件\SDL</Filter>
     </ClInclude>
     <ClInclude Include="include\core\window.h">
-      <Filter>头文件\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\core\init.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\core\ask.h">
@@ -126,6 +141,24 @@
       <Filter>头文件\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\core\textbox.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\object.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\base.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\font.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sdl\SDL_ttf.h">
+      <Filter>头文件\SDL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\demo\mainwin.h">
+      <Filter>头文件\Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\event.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
   </ItemGroup>
