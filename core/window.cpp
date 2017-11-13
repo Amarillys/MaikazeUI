@@ -38,6 +38,16 @@ void Win::Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags)
     ren = SDL_CreateRenderer(win, -1, 0);
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
     id = SDL_GetWindowID(win);
+
+    //set the window as the base object
+    winobj = new Object();
+    winobj->x = ix;
+    winobj->y = iy;
+    winobj->w = iw;
+    winobj->h = ih;
+    objmgr.push_back(winobj);
+
+    lastobj = 0;
     Draw();
     printf("Window %s Created.", SDL_GetWindowTitle(win));
 }
@@ -61,9 +71,28 @@ void Win::Hide()
 
 void Win::EvtRec(EVT ievt)
 {
-    printf("rec command: %d %d on Window %d\n", ievt.x, ievt.y, id);
-}
 
+    switch (ievt.type)
+    {
+    case MOUSE_MOVE:
+        newobj = LocaleObj(ievt.x, ievt.y);
+        printf("Rec command: Mouse moves at x:%d y:%d - on Window %d at object: %d\n", ievt.x, ievt.y, id, newobj);
+        objmgr[newobj]->Suspend();
+        //judge newobj
+        if (newobj != lastobj)
+            objmgr[lastobj]->Left();
+        lastobj = newobj;
+
+        break;
+    case KEY_DOWN:
+        printf("Rec command: key:%c - on Window %d\n", ievt.value, id);
+
+        break;
+    default:
+        break;
+    }
+
+}
 
 SDL_Window* Win::GetWin()
 {
@@ -72,7 +101,7 @@ SDL_Window* Win::GetWin()
 
 void Win::Add(Object* iobj)
 {
-    
+    objmgr.push_back(iobj);
 }
 
 SDL_Renderer* Win::GetRen()
@@ -100,3 +129,18 @@ int Win::GetID()
 {
     return id;
 }
+
+int Win::LocaleObj(int ix, int iy)
+{
+    for (int i = 1; i < objmgr.size(); ++i)
+    {
+        if (ix >= objmgr[i]->x
+            && iy >= objmgr[i]->y
+            && ix <= objmgr[i]->x + objmgr[i]->w
+            && iy <= objmgr[i]->y + objmgr[i]->h)
+            return i;
+    }
+    //not found, locale at the father window
+    return 0;
+}
+

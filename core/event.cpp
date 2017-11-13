@@ -12,8 +12,11 @@ EVT evttf(SDL_Event * ievt)
         break;
 
     case SDL_KEYDOWN:
+        ret.x = ievt->motion.x;
+        ret.y = ievt->motion.y;
         ret.type = KEY_DOWN;
         ret.value = ievt->key.keysym.sym;
+        break;
 
     default:
         ret.type = TYPE_NULL;

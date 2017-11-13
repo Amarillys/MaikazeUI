@@ -161,12 +161,14 @@
     <ClCompile Include="core\window.cpp" />
     <ClCompile Include="demo.cpp" />
     <ClCompile Include="demo\mainwin.cpp" />
+    <ClCompile Include="include\core\config.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\ask.h" />
     <ClInclude Include="include\core\button.h" />
     <ClInclude Include="include\core\check.h" />
     <ClInclude Include="include\core\combo.h" />
+    <ClInclude Include="include\core\config.h" />
     <ClInclude Include="include\core\event.h" />
     <ClInclude Include="include\core\font.h" />
     <ClInclude Include="include\core\frame.h" />

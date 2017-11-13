@@ -1,11 +1,7 @@
 #include "include\core\base.h"
 #include "include\core\font.h"
-#include "include\core\window.h"
-#include "include\core\button.h"
+#include "include\demo\mainwin.h"
 
-#include <vector>
-
-using std::vector;
 extern FontSys fsys("consolas.ttf");
 
 vector<Win*> winmgr;
@@ -16,12 +12,10 @@ int main(int argc, char * argv[])
 {
     init(SDL_INIT_EVERYTHING);
 
-    Win* mw = new Win("Hello MaikazeUI!", 640, 480);
-    printf("id:%d\n", SDL_GetWindowID(mw->GetWin()));
+    Mainwin* mw = new Mainwin();
     winmgr.push_back(mw);
 
     Win* sw = new Win("Second Window", 640, 480, 100, 200, SDL_WINDOW_SHOWN);
-    Object* btn = new Button(mw, 128, 128, 160, 50);
     winmgr.push_back(sw);
 
     SDL_Event evt;
@@ -31,13 +25,11 @@ int main(int argc, char * argv[])
         SDL_Delay(REFRESHTIME);
 
         if (SDL_PollEvent(&evt))
-            if (evt.type == SDL_MOUSEMOTION)
-                winmgr[FindWin(evt.motion.windowID)]->EvtRec(evttf(&evt));
+            winmgr[FindWin(evt.motion.windowID)]->EvtRec(evttf(&evt));
     }
     
-    getchar();
     for (Win* w : winmgr)
-        delete w;
+        DelWin(w);
     SDL_Quit();
     return 0;
 }
@@ -45,11 +37,10 @@ int main(int argc, char * argv[])
 /*return -1 if failed to find the window*/
 int FindWin(int iid)
 {
-    int id;
-    for (int i = 0; i < winmgr.size(); ++i)
+    for (unsigned int i = 0; i < winmgr.size(); ++i)
         if (winmgr[i]->GetID() == iid)
             return i;
-    return -1;
+    return 0;
 }
 
 void DelWin(Win * iwin)

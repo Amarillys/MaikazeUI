@@ -7,6 +7,9 @@
 #include "object.h"
 #include "event.h"
 
+#include <vector>
+using std::vector;
+
 class Win 
 {
 public:
@@ -26,6 +29,7 @@ public:
     void SetTitle(stdstr ititle);
     Color GetBgColor();
     int GetID();
+    int LocaleObj(int ix, int iy);
     ~Win();
 
 
@@ -35,14 +39,15 @@ private:
     SDL_Surface* sur;
     
     //the status for the focus object.
-    int newobj, curobj;
+    int newobj, curobj, lastobj;
+    Object* winobj;
 
     int id;
     stdstr title;
     int x, y, w, h;
     bool imgbg;
     Color bgcolor = Default;
-
+    vector<Object*> objmgr;
     Uint32 flags;
 
     void Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags);

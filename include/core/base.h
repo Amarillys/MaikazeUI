@@ -28,8 +28,7 @@ struct Color {
 //theme color config
 const Color Default{ 0x28, 0x2d, 0x32 };
 const Color ButtonColor{ 0x30, 0x40, 0x45 };
-
-
+const Color ButtonSuspendColor{ 0x38, 0x48, 0x50 };
 
 
 inline void rto0(int& ix)

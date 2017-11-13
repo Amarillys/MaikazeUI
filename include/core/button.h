@@ -13,23 +13,20 @@ public:
     void Click();
     void Hide();
     void Show();
-
+    void Suspend();
+    void Left();
     void Draw();
 
     Button(Win* iwin, int ix, int iy, int iw, int ih);
     ~Button();
 
-    u32 w, h, x, y;
     stdstr text;
     u32 textsize;
     
-    void(*f_click)() = callnull;
-    void(*f_show)() = callnull;
-    void(*f_hide)() = callnull;
-
 
 private:
     SDL_Surface* sur;
+    Color curclr;
 };
 
 

@@ -7,16 +7,33 @@ Object::Object()
     id = reinterpret_cast<u32>(this);
 }
 
+void Object::Click()
+{
+    f_click();
+}
+
 void Object::Draw()
 {
 }
 
+void Object::Left()
+{
+    f_left();
+}
+
 void Object::Show()
 {
+    f_show();
+}
+
+void Object::Suspend()
+{
+    f_suspend();
 }
 
 void Object::Hide()
 {
+    f_hide();
 }
 
 void Object::Rec()
