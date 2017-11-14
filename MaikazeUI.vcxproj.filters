@@ -93,6 +93,9 @@
     <ClCompile Include="core\event.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
+    <ClCompile Include="core\config.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\sdl\SDL.h">
@@ -159,6 +162,12 @@
       <Filter>头文件\Demo</Filter>
     </ClInclude>
     <ClInclude Include="include\core\event.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\config.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\theme.h">
       <Filter>头文件\Core</Filter>
     </ClInclude>
   </ItemGroup>

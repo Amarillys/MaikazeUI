@@ -22,14 +22,14 @@ FontSys::~FontSys()
     TTF_CloseFont(font);
 }
 
-void FontSys::ShowFont(stdstr istring, int ix, int iy, SDL_Renderer* iren)
+void FontSys::ShowFont(const char* istr, int ix, int iy, SDL_Renderer* iren)
 {
-    SDL_Surface* fsur = TTF_RenderText_Blended(font, istring.c_str(), SDL_Color{ 0x80, 0xda, 0xd0, 0x00});
+    SDL_Surface* fsur = TTF_RenderText_Blended(font, istr, SDL_Color{ 0x80, 0xda, 0xd0, 0x00});
     Refresh(iren, fsur, SDL_Rect{ 0, 0, fsur->w, fsur->h }, SDL_Rect{ix, iy, fsur->w, fsur->h});
 }
 
-void FontSys::ShowFontAutoPos(stdstr istring, int ix, int iy, int iw, int ih, SDL_Renderer* iren)
+void FontSys::ShowFontAutoPos(const char* istr, int ix, int iy, int iw, int ih, SDL_Renderer* iren)
 {
-    SDL_Surface* fsur = TTF_RenderText_Blended(font, istring.c_str(), SDL_Color{ 0x80, 0xda, 0xd0, 0x00 });
+    SDL_Surface* fsur = TTF_RenderUTF8_Blended(font, istr, SDL_Color{ 0x80, 0xda, 0xd0, 0x00 });
     Refresh(iren, fsur, SDL_Rect{ 0, 0, fsur->w, fsur->h }, SDL_Rect{ ix + (iw - fsur->w) / 2, iy + (ih - fsur->h) / 2, fsur->w, fsur->h });
 }

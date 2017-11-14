@@ -144,6 +144,7 @@
     <ClCompile Include="core\button.cpp" />
     <ClCompile Include="core\check.cpp" />
     <ClCompile Include="core\combo.cpp" />
+    <ClCompile Include="core\config.cpp" />
     <ClCompile Include="core\event.cpp" />
     <ClCompile Include="core\font.cpp" />
     <ClCompile Include="core\frame.cpp" />
@@ -161,7 +162,6 @@
     <ClCompile Include="core\window.cpp" />
     <ClCompile Include="demo.cpp" />
     <ClCompile Include="demo\mainwin.cpp" />
-    <ClCompile Include="include\core\config.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\core\ask.h" />
@@ -183,6 +183,7 @@
     <ClInclude Include="include\core\slider.h" />
     <ClInclude Include="include\core\status.h" />
     <ClInclude Include="include\core\textbox.h" />
+    <ClInclude Include="include\core\theme.h" />
     <ClInclude Include="include\core\window.h" />
     <ClInclude Include="include\demo\mainwin.h" />
     <ClInclude Include="include\sdl\SDL.h" />

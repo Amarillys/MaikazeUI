@@ -1,6 +1,7 @@
 /*
 Initilizer v0.01
 */
+#define _CRT_SECURE_NO_WARNINGS
 #ifndef MKZ_INIT_H_
 #define MKZ_INIT_H_
 
@@ -24,11 +25,6 @@ struct Color {
     uint8_t b;
     uint8_t a;
 };
-
-//theme color config
-const Color Default{ 0x28, 0x2d, 0x32 };
-const Color ButtonColor{ 0x30, 0x40, 0x45 };
-const Color ButtonSuspendColor{ 0x38, 0x48, 0x50 };
 
 
 inline void rto0(int& ix)
@@ -70,6 +66,7 @@ void Refresh(SDL_Renderer* iren, SDL_Texture* itex, SDL_Rect& isrect, SDL_Rect& 
 int min(int ia, int ib);
 int max(int ia, int ib);
 int abs(int ia);
+Color Str2Clr(stdstr istr);
 void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg);
 void Fill(SDL_Surface* isur, Color irgb);
 #endif // !MKZ_INIT_H_

@@ -47,6 +47,14 @@ int abs(int ia)
     return ia > 0? ia: -ia;
 }
 
+Color Str2Clr(stdstr istr)
+{
+    int r, g, b, a;
+    sscanf(istr.c_str(), "#%2x%2x%2x%2x;", &r, &g, &b, &a);
+    return Color{ static_cast<uint8_t>(r), static_cast<uint8_t>(g),
+        static_cast<uint8_t>(b), static_cast<uint8_t>(a) };
+}
+
 void Fill(SDL_Surface * isur, Color irgb)
 {
     if (SDL_MUSTLOCK(isur))

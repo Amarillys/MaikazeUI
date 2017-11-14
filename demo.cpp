@@ -1,22 +1,30 @@
-#include "include\core\base.h"
+#include "include\core\config.h"
+#include "include\core\theme.h"
 #include "include\core\font.h"
 #include "include\demo\mainwin.h"
 
-extern FontSys fsys("consolas.ttf");
+//#include <locale>
+//#include <codecvt>
+#include <fstream>
+
+extern FontSys fsys("c:/windows/fonts/FZYansum.ttf");
 
 vector<Win*> winmgr;
 int FindWin(int iid);
 void DelWin(Win* iwin);
 
+Theme DEFTHEME;
+Cfg* cfg = new Cfg("maikaze.cfg");
+void InitTheme();
+//extern int Theme = ;
+
 int main(int argc, char * argv[])
 {
+    
     init(SDL_INIT_EVERYTHING);
-
+    InitTheme();
     Mainwin* mw = new Mainwin();
     winmgr.push_back(mw);
-
-    Win* sw = new Win("Second Window", 640, 480, 100, 200, SDL_WINDOW_SHOWN);
-    winmgr.push_back(sw);
 
     SDL_Event evt;
 
@@ -31,6 +39,7 @@ int main(int argc, char * argv[])
     for (Win* w : winmgr)
         DelWin(w);
     SDL_Quit();
+    delete cfg;
     return 0;
 }
 
@@ -52,3 +61,31 @@ void DelWin(Win * iwin)
             return;
         }
 }
+
+void InitTheme()
+{
+    cfg->SetRoot("Main");
+    DEFTHEME.WinBg = { 0x28, 0x2d, 0x32 };
+    DEFTHEME.BtnBg = { 0x30, 0x40, 0x45 };
+    DEFTHEME.BtnBgSIn = { 0x33, 0x43, 0x48 };
+    DEFTHEME.BtnBgSOut = { 0x36, 0x46, 0x4B };
+
+
+}
+
+/*std::wstring str = L"ABC,ÖÐÎÄ";
+
+std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+
+std::string narrowStr = conv.to_bytes(str);
+{
+std::ofstream ofs("test.txt");
+ofs << narrowStr;
+}
+
+std::wstring wideStr = conv.from_bytes(narrowStr);
+{
+std::locale::global(std::locale("Chinese-simplified"));
+std::wofstream ofs(L"testW.txt");
+ofs << wideStr;
+}*/

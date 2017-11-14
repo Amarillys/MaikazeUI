@@ -46,7 +46,7 @@ private:
     stdstr title;
     int x, y, w, h;
     bool imgbg;
-    Color bgcolor = Default;
+    Color bgcolor;
     vector<Object*> objmgr;
     Uint32 flags;
 

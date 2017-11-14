@@ -16,17 +16,23 @@ public:
     void Suspend();
     void Left();
     void Draw();
+    
 
-    Button(Win* iwin, int ix, int iy, int iw, int ih);
+    Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih);
+    Button(Win* iwin, int ix, int iy, int iw, int ih, const char* name);
     ~Button();
 
-    stdstr text;
+    char* text;
     u32 textsize;
     
 
 private:
     SDL_Surface* sur;
     Color curclr;
+
+    void Create(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih);
+    void DrawBg();
+    void DrawFont();
 };
 
 
