@@ -160,7 +160,7 @@
     <ClCompile Include="core\status.cpp" />
     <ClCompile Include="core\textbox.cpp" />
     <ClCompile Include="core\window.cpp" />
-    <ClCompile Include="demo.cpp" />
+    <ClCompile Include="Maikaze.cpp" />
     <ClCompile Include="demo\mainwin.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -22,12 +22,15 @@ Cfg::~Cfg()
 
 void Cfg::Open()
 {
-    fp.open(name, std::ios::in);
-    if (fp.is_open())
-        return;
-
-    printf("failed to load the config file.\n");
-    broken = true;
+    fp = new ifstream(name);
+    if (!fp->is_open())
+    {
+        delete fp;
+        std::ofstream newcfg(name, std::ios::out);
+        newcfg << "//Config file\n//Dont forget the ';' at the end of a line.\n[Main]\n//Theme has two kind\n//Dark and White\nTheme = Dark;";
+        newcfg.close();
+        fp = new ifstream(name);
+    }
 }
 
 void Cfg::Load()
@@ -35,17 +38,62 @@ void Cfg::Load()
     if (broken)
         return;
 
-    /*while (!fp.eof())
+    stdstr line;
+    stdstr root = "";
+    int pos;
+    map<stdstr, stdstr> group;
+    while (getline(*fp, line))
     {
-        fp.getline();
-    }*/
+        pos = 0;
+        printf("line : %s\n", line.c_str());
 
+        if (line.size() < 1)
+            continue;
+        
+        if (line[0] == '/')
+            continue;
+
+        if (line[0] == '[')
+        {
+            //meet the new root, save the old root to the map
+            if (root != "")
+                content[root] = group;
+            group.clear();
+
+
+            //set to new root
+            char* tmpstr = new char[line.size() - 1]{ 0 };
+            for (; pos < line.size() - 2; ++pos)
+                tmpstr[pos] = line[pos + 1];
+            root = stdstr(tmpstr);
+            delete tmpstr;
+            continue;
+        }
+
+        char* key = new char[line.size() - 1]{ 0 };
+        for (; line[pos] != ' ' && line[pos] != '='; ++pos)
+            key[pos] = line[pos];
+        
+        char* value = new char[line.size() - 1]{ 0 };
+        for (int i = 0; line[pos] != ';'; ++pos)
+        {
+            if (line[pos] == ' ' || line[pos] == '=')
+                continue;
+            value[i++] = line[pos];
+        }
+
+        group[stdstr(key)] = stdstr(value);
+        delete key;
+        delete value;
+    }
+    content[root] = group;
+    group.clear();
 }
 
 void Cfg::Close()
 {
-    /*if (fp != nullptr)
-        fclose(fp);*/
+    fp->close();
+    delete fp;
 }
 
 void Cfg::SetRoot(stdstr iroot)
@@ -75,20 +123,20 @@ Color Cfg::ReadColor(stdstr ikey)
 
 stdstr Cfg::ReadString(stdstr iroot, stdstr ikey)
 {
-    return stdstr();
+    return content[iroot][ikey];
 }
 
 int Cfg::ReadInt(stdstr iroot, stdstr ikey)
 {
-    return 0;
+    return atoi(content[iroot][ikey].c_str());
 }
 
 float Cfg::ReadFloat(stdstr iroot, stdstr ikey)
 {
-    return 0.0f;
+    return atof(content[iroot][ikey].c_str());
 }
 
 Color Cfg::ReadColor(stdstr iroot, stdstr ikey)
 {
-    return Color();
+    return Str2Clr(content[iroot][ikey]);
 }

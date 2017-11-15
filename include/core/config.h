@@ -4,10 +4,13 @@ v0.00 Maikaze Simple Configer
 #define _CRT_SECURE_NO_WARNINGS
 #include "base.h"
 #include <fstream>
+#include <string>
 #include <map>
+#include <vector>
 
 using std::map;
-using std::fstream;
+using std::ifstream;
+using std::getline;
 
 class Cfg
 {
@@ -18,7 +21,8 @@ public:
 
     /*When this class was created, Open() will be automatically called.*/
     void SetRoot(stdstr iroot);
-
+    
+    /*utf-8 only*/
     stdstr ReadString(stdstr ikey);
     int ReadInt(stdstr ikey);
     float ReadFloat(stdstr ikey);
@@ -37,7 +41,7 @@ private:
     stdstr name = "maikaze.cfg";
     stdstr root = "main";
     bool broken = false;
-    fstream fp;
+    ifstream* fp = nullptr;
 
     map<stdstr, map<stdstr, stdstr>> content;
 };

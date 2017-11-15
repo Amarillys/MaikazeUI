@@ -3,11 +3,7 @@
 #include "include\core\font.h"
 #include "include\demo\mainwin.h"
 
-//#include <locale>
-//#include <codecvt>
 #include <fstream>
-
-extern FontSys fsys("c:/windows/fonts/FZYansum.ttf");
 
 vector<Win*> winmgr;
 int FindWin(int iid);
@@ -16,7 +12,7 @@ void DelWin(Win* iwin);
 Theme DEFTHEME;
 Cfg* cfg = new Cfg("maikaze.cfg");
 void InitTheme();
-//extern int Theme = ;
+extern FontSys fsys(cfg->ReadString("Main", "Font"));
 
 int main(int argc, char * argv[])
 {
@@ -62,30 +58,13 @@ void DelWin(Win * iwin)
         }
 }
 
+/*Read the theme settings from config file.*/
 void InitTheme()
 {
-    cfg->SetRoot("Main");
-    DEFTHEME.WinBg = { 0x28, 0x2d, 0x32 };
-    DEFTHEME.BtnBg = { 0x30, 0x40, 0x45 };
-    DEFTHEME.BtnBgSIn = { 0x33, 0x43, 0x48 };
-    DEFTHEME.BtnBgSOut = { 0x36, 0x46, 0x4B };
+    stdstr cfgtheme = cfg->ReadString("Main", "Theme");
+    
+    if (cfgtheme == "Dark")
+        DEFTHEME = DK;
 
-
+    //white, custom to do
 }
-
-/*std::wstring str = L"ABC,ÖÐÎÄ";
-
-std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-
-std::string narrowStr = conv.to_bytes(str);
-{
-std::ofstream ofs("test.txt");
-ofs << narrowStr;
-}
-
-std::wstring wideStr = conv.from_bytes(narrowStr);
-{
-std::locale::global(std::locale("Chinese-simplified"));
-std::wofstream ofs(L"testW.txt");
-ofs << wideStr;
-}*/
