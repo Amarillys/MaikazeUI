@@ -35,9 +35,6 @@ void Cfg::Open()
 
 void Cfg::Load()
 {
-    if (broken)
-        return;
-
     stdstr line;
     stdstr root = "";
     int pos;

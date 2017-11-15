@@ -1,6 +1,8 @@
 /*
 v0.00 Maikaze Simple Configer
 */
+#ifndef MAIKAZE_CONFIG_H_
+#define MAIKAZE_CONFIG_H_
 #define _CRT_SECURE_NO_WARNINGS
 #include "base.h"
 #include <fstream>
@@ -33,15 +35,17 @@ public:
     float ReadFloat(stdstr iroot, stdstr ikey);
     Color ReadColor(stdstr iroot, stdstr ikey);
 
-private:
-    void Open();
-    void Load();
-    void Close();
+protected:
 
+    ifstream* fp = nullptr;
     stdstr name = "maikaze.cfg";
     stdstr root = "main";
-    bool broken = false;
-    ifstream* fp = nullptr;
 
+    virtual void Open();
+    void Load();
+    void Close();
+    
     map<stdstr, map<stdstr, stdstr>> content;
 };
+
+#endif

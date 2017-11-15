@@ -22,17 +22,19 @@ public:
     Button(Win* iwin, int ix, int iy, int iw, int ih, const char* name);
     ~Button();
 
-    char* text;
+    stdstr name;
+    stdstr showtext;
     u32 textsize;
     
 
-private:
+protected:
     SDL_Surface* sur;
     Color curclr;
 
-    void Create(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih);
+    void Create(Win* iwin, const char* icaption, const char* name, int ix, int iy, int iw, int ih);
     void DrawBg();
     void DrawFont();
+    void CheckText();
 };
 
 

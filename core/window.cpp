@@ -92,6 +92,11 @@ void Win::EvtRec(EVT ievt)
         printf("Rec command: key:%c - on Window %d\n", ievt.value, id);
 
         break;
+
+    case MOUSE_UP:
+        objmgr[newobj]->Click();
+        break;
+
     default:
         break;
     }

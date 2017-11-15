@@ -1,20 +1,21 @@
 /**/
-
+#include "../include/core/config.h"
 #include "../include/core/button.h"
+#include "../include/core/locale.h"
 #include "../include/core/theme.h"
 
 extern FontSys fsys;
 extern Theme DEFTHEME;
+extern LocaleFile* lang;
 
 Button::Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih)
 {
-    Create(iwin, icaption, ix, iy, iw, ih);
+    Create(iwin, icaption, "", ix, iy, iw, ih);
 }
 
-Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * name)
+Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * iname)
 {
-    text = u8"fuck";
-    Create(iwin, text, ix, iy, iw, ih);
+    Create(iwin, lang->ReadString(lang->curLang, iname).c_str(), iname, ix, iy, iw, ih);
 }
 
 Button::~Button()
@@ -22,15 +23,15 @@ Button::~Button()
     f_click();
 }
 
-void Button::Create(Win* iwin, const char * icaption, int ix, int iy, int iw, int ih)
+void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix, int iy, int iw, int ih)
 {
     Set(iwin);
     w = to0(iw);
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
-    text = new char[strlen(icaption)];
-    strcpy(text, icaption);
+    name = iname;
+    showtext = icaption;
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
     curclr = DEFTHEME.BtnBg;
     printf("%d\n", SDL_PIXELFORMAT_BGR24);
@@ -49,7 +50,16 @@ void Button::DrawBg()
 
 void Button::DrawFont()
 {
-    fsys.ShowFontAutoPos(text, x, y, w, h, GetFather()->GetRen());
+    fsys.ShowFontAutoPos(showtext.c_str(), x, y, w, h, GetFather()->GetRen());
+}
+
+void Button::CheckText()
+{
+    if (name == "")
+        return;
+    showtext = lang->ReadString(lang->curLang, name);
+    if (showtext == "")
+        showtext = name;
 }
 
 void Button::Click()
@@ -88,6 +98,7 @@ void Button::Hide()
 void Button::Draw()
 {
     //f_click();
+    CheckText();
     DrawBg();
     DrawFont();
 }

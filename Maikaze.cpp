@@ -1,4 +1,4 @@
-#include "include\core\config.h"
+#include "include\core\locale.h"
 #include "include\core\theme.h"
 #include "include\core\font.h"
 #include "include\demo\mainwin.h"
@@ -12,14 +12,20 @@ void DelWin(Win* iwin);
 Theme DEFTHEME;
 Cfg* cfg = new Cfg("maikaze.cfg");
 void InitTheme();
+
+LocaleFile* lang = new LocaleFile("locale.cfg");
+void InitLanguage();
 extern FontSys fsys(cfg->ReadString("Main", "Font"));
+
+Mainwin* mw;
 
 int main(int argc, char * argv[])
 {
     
     init(SDL_INIT_EVERYTHING);
     InitTheme();
-    Mainwin* mw = new Mainwin();
+    InitLanguage();
+    mw = new Mainwin();
     winmgr.push_back(mw);
 
     SDL_Event evt;
@@ -67,4 +73,9 @@ void InitTheme()
         DEFTHEME = DK;
 
     //white, custom to do
+}
+
+void InitLanguage()
+{
+    lang->SetLocale(cfg->ReadString("Main", "Language"));
 }

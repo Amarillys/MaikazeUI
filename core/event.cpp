@@ -18,6 +18,14 @@ EVT evttf(SDL_Event * ievt)
         ret.value = ievt->key.keysym.sym;
         break;
 
+    case SDL_MOUSEBUTTONDOWN:
+        ret.type = MOUSE_DOWN;
+        break;
+
+    case SDL_MOUSEBUTTONUP:
+        ret.type = MOUSE_UP;
+        break;
+
     default:
         ret.type = TYPE_NULL;
         break;

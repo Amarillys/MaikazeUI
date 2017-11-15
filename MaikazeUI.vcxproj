@@ -152,6 +152,7 @@
     <ClCompile Include="core\label.cpp" />
     <ClCompile Include="core\line.cpp" />
     <ClCompile Include="core\list.cpp" />
+    <ClCompile Include="core\locale.cpp" />
     <ClCompile Include="core\menu.cpp" />
     <ClCompile Include="core\msg.cpp" />
     <ClCompile Include="core\object.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="include\core\label.h" />
     <ClInclude Include="include\core\line.h" />
     <ClInclude Include="include\core\list.h" />
+    <ClInclude Include="include\core\locale.h" />
     <ClInclude Include="include\core\menu.h" />
     <ClInclude Include="include\core\msg.h" />
     <ClInclude Include="include\core\object.h" />
