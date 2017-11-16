@@ -2,6 +2,7 @@
 
 #include "../include/core/font.h"
 
+
 FontSys::FontSys(stdstr ifont)
 {
     if (TTF_Init() == -1) {
@@ -28,8 +29,8 @@ void FontSys::ShowFont(const char* istr, int ix, int iy, SDL_Renderer* iren)
     Refresh(iren, fsur, SDL_Rect{ 0, 0, fsur->w, fsur->h }, SDL_Rect{ix, iy, fsur->w, fsur->h});
 }
 
-void FontSys::ShowFontAutoPos(const char* istr, int ix, int iy, int iw, int ih, SDL_Renderer* iren)
+void FontSys::ShowFontAutoPos(const char* istr, int ix, int iy, int iw, int ih, SDL_Renderer* iren, SDL_Color iclr)
 {
-    SDL_Surface* fsur = TTF_RenderUTF8_Blended(font, istr, SDL_Color{ 0x80, 0xda, 0xd0, 0x00 });
+    SDL_Surface* fsur = TTF_RenderUTF8_Blended(font, istr, iclr);
     Refresh(iren, fsur, SDL_Rect{ 0, 0, fsur->w, fsur->h }, SDL_Rect{ ix + (iw - fsur->w) / 2, iy + (ih - fsur->h) / 2, fsur->w, fsur->h });
 }

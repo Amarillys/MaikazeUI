@@ -13,12 +13,11 @@ class Mainwin : public Win
 {
 public:
     //
-    void Try();
     Mainwin();
-
-private:
     Button* btn;
     Button* btn2;
+
+private:
 };
 
 #endif

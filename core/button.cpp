@@ -33,15 +33,17 @@ void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix
     name = iname;
     showtext = icaption;
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
-    curclr = DEFTHEME.BtnBg;
-    printf("%d\n", SDL_PIXELFORMAT_BGR24);
-    printf("%d\n", sur->format->format);
+    cs = CONTRARY;
+    SwitchCS(cs);
+    st = MouseLeft;
+    curclr = inclr;
     Draw();
-
 }
 
 void Button::DrawBg()
 {
+    SwitchCS(cs);
+    curclr = (st == MouseLeft ? inclr : clr);
     SDL_Rect srect{ 0, 0, w, h };
     SDL_Rect drect{ x, y, w, h };
     FillCRectSimple(sur, curclr, GetFather()->GetBgColor());
@@ -50,7 +52,7 @@ void Button::DrawBg()
 
 void Button::DrawFont()
 {
-    fsys.ShowFontAutoPos(showtext.c_str(), x, y, w, h, GetFather()->GetRen());
+    fsys.ShowFontAutoPos(showtext.c_str(), x, y, w, h, GetFather()->GetRen(), fontclr);
 }
 
 void Button::CheckText()
@@ -74,18 +76,14 @@ void Button::Show()
 
 void Button::Suspend()
 {
-    curclr = DEFTHEME.BtnBgSIn;
-    Draw();
-    curclr = DEFTHEME.BtnBgSOut;
+    st = MouseSuspend;
     Draw();
     f_suspend();
 }
 
 void Button::Left()
 {
-    curclr = DEFTHEME.BtnBgSIn;
-    Draw();
-    curclr = DEFTHEME.BtnBg;
+    st = MouseLeft;
     Draw();
     f_left();
 }
@@ -97,8 +95,32 @@ void Button::Hide()
 
 void Button::Draw()
 {
-    //f_click();
     CheckText();
     DrawBg();
     DrawFont();
+}
+
+void Button::SwitchCS(CStyle ics)
+{
+    int addclr = (DEFTHEME.WinBg.r < 128) ? 1 : -1;
+    cs = ics;
+    switch (cs)
+    {
+    case TRANSPARENT:
+        inclr = DEFTHEME.WinBg;
+        clr = Color{ static_cast<uint8_t>(DEFTHEME.WinBg.r + 10 * addclr), static_cast<uint8_t>(DEFTHEME.WinBg.g + 10 * addclr),
+            static_cast<uint8_t>(DEFTHEME.WinBg.b + 10 * addclr), static_cast<uint8_t>(DEFTHEME.WinBg.a + 10 * addclr) };
+        fontclr = DEFTHEME.FontColor;
+        
+        if (DEFTHEME.BtnBg.r == Hikari.BtnBg.r)
+            fontclr = DEFTHEME.BtnBg;
+        break;
+
+    case CONTRARY:
+    default:
+        clr = DEFTHEME.BtnBgSOut;
+        inclr = DEFTHEME.BtnBg;
+        fontclr = DEFTHEME.FontColor;
+        break;
+    }
 }

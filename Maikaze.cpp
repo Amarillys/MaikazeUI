@@ -73,6 +73,8 @@ void InitTheme()
         DEFTHEME = DK;
 
     //white, custom to do
+    if (cfgtheme == "Hikari")
+        DEFTHEME = Hikari;
 }
 
 void InitLanguage()

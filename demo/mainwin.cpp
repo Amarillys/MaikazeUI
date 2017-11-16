@@ -1,13 +1,10 @@
 #include "..\include\demo\mainwin.h"
 #include "..\include\core\locale.h"
+#include "..\include\core\theme.h"
 
 extern LocaleFile* lang;
 extern Mainwin* mw;
-void Mainwin::Try()
-{
-    btn2->showtext = u8"ÀÏÑýÆÅ";
-    btn2->Draw();
-}
+extern Theme DEFTHEME;
 
 Mainwin::Mainwin()
 {
@@ -18,6 +15,8 @@ Mainwin::Mainwin()
     Add(btn);
 
     btn2 = new Button(this, u8"¹þ¹þ", 328, 328, 160, 50);
+    btn2->SwitchCS(TRANSPARENT);
+    btn2->Draw();
     Add(btn2);
 }
 
@@ -33,5 +32,8 @@ void TestBtn_Left()
 
 void TestBtn_Click()
 {
-    mw->Try();
+    mw->btn2->showtext = u8"ÀÏÑýÆÅ";
+    DEFTHEME = Hikari;
+    mw->Draw();
+//    mw->btn2->Draw();
 }

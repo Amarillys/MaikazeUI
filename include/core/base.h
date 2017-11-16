@@ -19,13 +19,21 @@ const int REFRESHTIME = 30;
 const int CircleDevide = 56;
 void init(u32 flags); 
 
-struct Color {
-    uint8_t r;
-    uint8_t g;
-    uint8_t b;
-    uint8_t a;
+using Color = SDL_Color;
+
+/*Color Style*/
+enum CStyle
+{
+    CONTRARY,
+    TRANSPARENT
 };
 
+enum Status
+{
+    OnFocus,
+    MouseSuspend,
+    MouseLeft
+};
 
 inline void rto0(int& ix)
 { 

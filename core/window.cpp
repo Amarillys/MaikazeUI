@@ -35,7 +35,6 @@ void Win::Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags)
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
-    bgcolor = DEFTHEME.WinBg;
     win = SDL_CreateWindow(ititle.c_str(), ix, iy, iw, ih, SDL_WINDOW_SHOWN);
     ren = SDL_CreateRenderer(win, -1, 0);
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
@@ -78,6 +77,7 @@ void Win::EvtRec(EVT ievt)
     {
     case MOUSE_MOVE:
         newobj = LocaleObj(ievt.x, ievt.y);
+        printf("LastObj: %d, NewObj: %d\n", lastobj, newobj);
         printf("Rec command: Mouse moves at x:%d y:%d - on Window %d at object: %d\n", ievt.x, ievt.y, id, newobj);
         //judge newobj
         if (newobj != lastobj)
@@ -120,8 +120,11 @@ SDL_Renderer* Win::GetRen()
 
 void Win::Draw()
 {
+    bgcolor = DEFTHEME.WinBg;
     Fill(sur, bgcolor);
     Refresh(ren, sur, SDL_Rect{ 0, 0, w, h }, SDL_Rect{ 0, 0, w, h });
+    for (auto o : objmgr)
+        o->Draw();
 }
 
 void Win::SetTitle(stdstr ititle)

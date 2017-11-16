@@ -103,17 +103,17 @@ void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg)
         r = 2;
         b = 0;
     }
-
+    int addclr = ibg.r > irgb.r ? 1 : -1;
     Color Dark0 = ibg;
-    Color Dark1 = Color{ static_cast<uint8_t>((uint8_t)(ibg.r + irgb.r) / 2),
-        static_cast<uint8_t>((uint8_t)(ibg.g + irgb.g) / 2),
-        static_cast<uint8_t>((ibg.b + irgb.b) / 2) };
-    Color Dark2 = Color{ static_cast<uint8_t>(ibg.r - (ibg.r - irgb.r) / 3),
-        static_cast<uint8_t>(ibg.g - (ibg.g - irgb.g) / 3),
-            static_cast<uint8_t>(ibg.b - (ibg.b - irgb.b) / 3) };
-    Color Dark3 = Color{ static_cast<uint8_t>(irgb.r - (irgb.r - ibg.r) / 3),
-        static_cast<uint8_t>(irgb.g - (irgb.g - ibg.g) / 3),
-            static_cast<uint8_t>(irgb.b - (irgb.b - ibg.b) / 3) };
+    Color Dark1 = Color{ static_cast<uint8_t>(ibg.r + addclr * 5),
+        static_cast<uint8_t>(ibg.g + addclr * 5),
+        static_cast<uint8_t>(ibg.b + addclr * 5) };
+    Color Dark2 = Color{ static_cast<uint8_t>(ibg.r + addclr * 5),
+        static_cast<uint8_t>(ibg.g + addclr * 5),
+            static_cast<uint8_t>(ibg.b + addclr * 5) };
+    Color Dark3 = Color{ static_cast<uint8_t>(irgb.r + addclr * 5),
+        static_cast<uint8_t>(irgb.g + addclr * 5),
+            static_cast<uint8_t>(irgb.b + addclr * 5) };
     
     int w = isur->w;
     int h = isur->h;
