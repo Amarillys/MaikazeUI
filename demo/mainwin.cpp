@@ -1,6 +1,4 @@
 #include "..\include\demo\mainwin.h"
-#include "..\include\core\locale.h"
-#include "..\include\core\theme.h"
 
 extern LocaleFile* lang;
 extern Mainwin* mw;

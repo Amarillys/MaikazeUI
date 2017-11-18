@@ -1,8 +1,5 @@
 /**/
-#include "../include/core/config.h"
 #include "../include/core/button.h"
-#include "../include/core/locale.h"
-#include "../include/core/theme.h"
 
 extern FontSys fsys;
 extern Theme DEFTHEME;
@@ -77,6 +74,7 @@ void Button::Show()
 void Button::Suspend()
 {
     st = MouseSuspend;
+    SetCursor(MOUSE_HAND);
     Draw();
     f_suspend();
 }
@@ -84,6 +82,7 @@ void Button::Suspend()
 void Button::Left()
 {
     st = MouseLeft;
+    SetCursor(MOUSE_NORMAL);
     Draw();
     f_left();
 }

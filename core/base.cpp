@@ -88,6 +88,18 @@ void Fill(SDL_Surface * isur, Color irgb)
         SDL_UnlockSurface(isur);
 }
 
+void SetCursor(SDL_Cursor * icur)
+{
+    if (icur == nullptr)
+    {
+        //log
+        return;
+    }
+    SDL_SetCursor(icur);
+}
+
+
+
 void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg)
 {
     Fill(isur, irgb);

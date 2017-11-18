@@ -4,7 +4,6 @@ Initilizer v0.01
 #define _CRT_SECURE_NO_WARNINGS
 #ifndef MKZ_INIT_H_
 #define MKZ_INIT_H_
-
 #define vname_(x) #x
 #define vname(x) vname_(x)
 
@@ -19,6 +18,18 @@ const int REFRESHTIME = 30;
 const int CircleDevide = 56;
 void init(u32 flags); 
 
+extern SDL_Cursor* MOUSE_BUSY;
+extern SDL_Cursor* MOUSE_CROSSHAIR;
+extern SDL_Cursor* MOUSE_HAND;
+extern SDL_Cursor* MOUSE_NO;
+extern SDL_Cursor* MOUSE_NORMAL;
+extern SDL_Cursor* MOUSE_SIZE_ALL;
+extern SDL_Cursor* MOUSE_SIZE_NESW;
+extern SDL_Cursor* MOUSE_SIZE_NS;
+extern SDL_Cursor* MOUSE_SIZE_NWSE;
+extern SDL_Cursor* MOUSE_SIZE_WE;
+extern SDL_Cursor* MOUSE_WAIT;
+
 using Color = SDL_Color;
 
 /*Color Style*/
@@ -28,6 +39,7 @@ enum CStyle
     TRANSPARENT
 };
 
+/*Event for Object Status*/
 enum Status
 {
     OnFocus,
@@ -77,4 +89,6 @@ int abs(int ia);
 Color Str2Clr(stdstr istr);
 void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg);
 void Fill(SDL_Surface* isur, Color irgb);
+void SetCursor(SDL_Cursor* icur);
+
 #endif // !MKZ_INIT_H_

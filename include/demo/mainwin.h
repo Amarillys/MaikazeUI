@@ -4,6 +4,8 @@
 
 #include "../core/window.h"
 #include "../core/button.h"
+#include "../core/locale.h"
+#include "../core/theme.h"
 
 void TestBtn_Suspend();
 void TestBtn_Left();

@@ -37,7 +37,7 @@ void Cfg::Load()
 {
     stdstr line;
     stdstr root = "";
-    int pos;
+    unsigned int pos;
     map<stdstr, stdstr> group;
     while (getline(*fp, line))
     {
@@ -130,7 +130,7 @@ int Cfg::ReadInt(stdstr iroot, stdstr ikey)
 
 float Cfg::ReadFloat(stdstr iroot, stdstr ikey)
 {
-    return atof(content[iroot][ikey].c_str());
+    return static_cast<float>(atof(content[iroot][ikey].c_str()));
 }
 
 Color Cfg::ReadColor(stdstr iroot, stdstr ikey)

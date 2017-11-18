@@ -5,7 +5,8 @@
 
 #include "font.h"
 #include "window.h"
-#include "object.h"
+#include "locale.h"
+#include "theme.h"
 
 class Button:public Object
 {
@@ -46,5 +47,4 @@ protected:
 };
 
 
-#define MKZ_BUTTON_H_
 #endif // !MKZ_BUTTON_H_
