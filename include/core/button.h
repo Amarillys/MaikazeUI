@@ -13,6 +13,7 @@ class Button:public Object
 public:
     void Click();
     void Hide();
+    void ReDraw();
     void Show();
     void Suspend();
     void Left();

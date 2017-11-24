@@ -129,7 +129,7 @@ void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg)
     
     int w = isur->w;
     int h = isur->h;
-    if (isur->h < CircleDevide)
+    if (isur->h < CircleDevide * 10)
     {
         ((uint8_t *)isur->pixels)[Fuck(1, 1, w) + r] =
             ((uint8_t *)isur->pixels)[Fuck(w, 1, w) + r] =

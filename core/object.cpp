@@ -21,6 +21,10 @@ void Object::Left()
     f_left();
 }
 
+void Object::ReDraw()
+{
+}
+
 void Object::Show()
 {
     f_show();

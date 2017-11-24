@@ -13,12 +13,14 @@ public:
     virtual void Click();
     virtual void Draw();
     virtual void Left();
+    virtual void ReDraw();
     virtual void Show();
     virtual void Suspend();
     virtual void Hide();
     virtual void Rec();
 
     int x, y, w, h;
+    int dx, dy, dw, dh;
     void Set(Win* iwin);
     Win* GetFather();
     //paiting priority

@@ -27,7 +27,13 @@ void Cfg::Open()
     {
         delete fp;
         std::ofstream newcfg(name, std::ios::out);
-        newcfg << "//Config file\n//Dont forget the ';' at the end of a line.\n[Main]\n//Theme has two kind\n//Dark and White\nTheme = Dark;";
+        newcfg << "//Config file\n"
+            "//Dont forget the ';' at the end of a line.\n"
+            "[Main]\n"
+            "//Theme has two kind\n"
+            "//Dark and White\n"
+            "Theme = Dark;"
+            "Zoom = 1;";
         newcfg.close();
         fp = new ifstream(name);
     }

@@ -5,6 +5,7 @@
 #include "../include/core/window.h"
 #include "../include/core/theme.h"
 
+extern float ZOOM;
 extern Theme DEFTHEME;
 Win::Win()
 {
@@ -35,7 +36,9 @@ void Win::Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags)
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
-    win = SDL_CreateWindow(ititle.c_str(), ix, iy, iw, ih, SDL_WINDOW_SHOWN);
+    title = ititle;
+    
+    win = SDL_CreateWindow(title.c_str(), x * ZOOM, y * ZOOM, w * ZOOM, h * ZOOM, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
     ren = SDL_CreateRenderer(win, -1, 0);
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
     id = SDL_GetWindowID(win);
@@ -103,6 +106,29 @@ void Win::EvtRec(EVT ievt)
 
 }
 
+void Win::ReDraw()
+{
+    SDL_FreeSurface(sur);
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
+
+    int tw = w * ZOOM;
+    int th = h * ZOOM;
+    win = SDL_CreateWindow(title.c_str(), x, y, tw, th, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+    ren = SDL_CreateRenderer(win, -1, 0);
+    sur = SDL_CreateRGBSurface(0, tw, th, 24, 0, 0, 0, 0);
+    id = SDL_GetWindowID(win);
+
+    for (auto o : objmgr)
+        o->ReDraw();
+    Draw();
+}
+
+void Win::SetLogicSize(int iw, int ih)
+{
+    SDL_RenderSetLogicalSize(ren, iw, ih);
+}
+
 SDL_Window* Win::GetWin()
 {
     return win;
@@ -122,7 +148,9 @@ void Win::Draw()
 {
     bgcolor = DEFTHEME.WinBg;
     Fill(sur, bgcolor);
-    Refresh(ren, sur, SDL_Rect{ 0, 0, w, h }, SDL_Rect{ 0, 0, w, h });
+    int tw = w * ZOOM;
+    int th = h * ZOOM;
+    Refresh(ren, sur, SDL_Rect{ 0, 0, tw, th}, SDL_Rect{ 0, 0, tw, th });
     for (auto o : objmgr)
         o->Draw();
 }
@@ -146,10 +174,10 @@ int Win::LocaleObj(int ix, int iy)
 {
     for (unsigned int i = 1; i < objmgr.size(); ++i)
     {
-        if (ix >= objmgr[i]->x
-            && iy >= objmgr[i]->y
-            && ix <= objmgr[i]->x + objmgr[i]->w
-            && iy <= objmgr[i]->y + objmgr[i]->h)
+        if (ix >= objmgr[i]->dx
+            && iy >= objmgr[i]->dy
+            && ix <= objmgr[i]->dx + objmgr[i]->dw
+            && iy <= objmgr[i]->dy + objmgr[i]->dh)
             return i;
     }
     //not found, locale at the father window

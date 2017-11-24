@@ -16,6 +16,7 @@ public:
 
 private:
     TTF_Font * font;
+    int size;
 };
 
 #endif // !MKZ_FONT_H_

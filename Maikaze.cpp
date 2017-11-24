@@ -11,6 +11,7 @@ Theme DEFTHEME;
 Cfg* cfg = new Cfg("maikaze.cfg");
 void InitTheme();
 
+float ZOOM = 1;
 //Cursor system, defined at base.h
 SDL_Cursor* MOUSE_HAND;
 SDL_Cursor* MOUSE_BUSY;

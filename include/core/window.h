@@ -25,6 +25,8 @@ public:
     void Show();
     void Hide();
     void EvtRec(EVT ievt);
+    void ReDraw();
+    void SetLogicSize(int iw, int ih);
     SDL_Window* Win::GetWin();
     void SetTitle(stdstr ititle);
     Color GetBgColor();
@@ -33,7 +35,7 @@ public:
     ~Win();
 
 
-private:
+protected:
     SDL_Window* win;
     SDL_Renderer * ren;
     SDL_Surface* sur;

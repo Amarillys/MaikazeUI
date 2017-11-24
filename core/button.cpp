@@ -4,7 +4,7 @@
 extern FontSys fsys;
 extern Theme DEFTHEME;
 extern LocaleFile* lang;
-
+extern float ZOOM;
 Button::Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih)
 {
     Create(iwin, icaption, "", ix, iy, iw, ih);
@@ -27,9 +27,13 @@ void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
+    dx = x * ZOOM;
+    dy = y * ZOOM;
+    dw = w * ZOOM;
+    dh = h * ZOOM;
     name = iname;
     showtext = icaption;
-    sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
+    sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
     cs = CONTRARY;
     SwitchCS(cs);
     st = MouseLeft;
@@ -41,15 +45,15 @@ void Button::DrawBg()
 {
     SwitchCS(cs);
     curclr = (st == MouseLeft ? inclr : clr);
-    SDL_Rect srect{ 0, 0, w, h };
-    SDL_Rect drect{ x, y, w, h };
+    SDL_Rect srect{ 0, 0, dw, dh };
+    SDL_Rect drect{ dx, dy, dw, dh };
     FillCRectSimple(sur, curclr, GetFather()->GetBgColor());
     Refresh(GetFather()->GetRen(), sur, srect, drect);
 }
 
 void Button::DrawFont()
 {
-    fsys.ShowFontAutoPos(showtext.c_str(), x, y, w, h, GetFather()->GetRen(), fontclr);
+    fsys.ShowFontAutoPos(showtext.c_str(), dx, dy, dw, dh, GetFather()->GetRen(), fontclr);
 }
 
 void Button::CheckText()
@@ -90,6 +94,16 @@ void Button::Left()
 void Button::Hide()
 {
     f_click();
+}
+
+void Button::ReDraw()
+{
+    dx = x * ZOOM;
+    dy = y * ZOOM;
+    dw = w * ZOOM;
+    dh = h * ZOOM;
+    SDL_FreeSurface(sur);
+    sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
 }
 
 void Button::Draw()
