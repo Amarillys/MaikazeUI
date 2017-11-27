@@ -66,24 +66,45 @@ void Fill(SDL_Surface * isur, Color irgb)
     int r = 0;
     int g = 1;
     int b = 2;
-    if (isur->format->format == SDL_PIXELFORMAT_BGR24)
+    int a = 3;
+    switch (isur->format->format)
     {
+    case SDL_PIXELFORMAT_BGR24:
         r = 2;
         b = 0;
-    }
-
-    for (int line = 0; line < isur->h; ++line)
-    {
-        for (int i = 0; i < isur->w; ++i)
+        for (int line = 0; line < isur->h; ++line)
         {
-            ((uint8_t *)isur->pixels)[pos + r] = irgb.r;
-            ((uint8_t *)isur->pixels)[pos + g] = irgb.g;
-            ((uint8_t *)isur->pixels)[pos + b] = irgb.b;
-            pos += 3;
+            for (int i = 0; i < isur->w; ++i)
+            {
+                ((uint8_t *)isur->pixels)[pos + r] = irgb.r;
+                ((uint8_t *)isur->pixels)[pos + g] = irgb.g;
+                ((uint8_t *)isur->pixels)[pos + b] = irgb.b;
+                pos += 3;
+            }
+            //magic sdl
+            pos += isur->w % 4;
         }
-        //magic sdl
-        pos += isur->w % 4;
+        break;
+    
+    case SDL_PIXELFORMAT_RGBA32:
+        for (int line = 0; line < isur->h; ++line)
+        {
+            for (int i = 0; i < isur->w; ++i)
+            {
+                ((uint8_t *)isur->pixels)[pos + r] = irgb.r;
+                ((uint8_t *)isur->pixels)[pos + g] = irgb.g;
+                ((uint8_t *)isur->pixels)[pos + b] = irgb.b;
+                ((uint8_t *)isur->pixels)[pos + a] = irgb.a;
+                pos += 4;
+            }
+        }
+        break;
+
+    default:
+        //
+        break;
     }
+    
     if (SDL_MUSTLOCK(isur))
         SDL_UnlockSurface(isur);
 }
@@ -181,4 +202,16 @@ void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg)
 
     if (SDL_MUSTLOCK(isur))
         SDL_UnlockSurface(isur);
+}
+
+int TestThread(void *ptr)
+{
+    int cnt;
+
+    for (cnt = 0; cnt < 10; ++cnt) {
+        printf("\nThread counter: %d", cnt);
+        SDL_Delay(500);
+    }
+
+    return cnt;
 }

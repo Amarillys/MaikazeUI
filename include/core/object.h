@@ -10,9 +10,12 @@ class Object
 {
 public:
     Object();
+    virtual ~Object();
     virtual void Click();
     virtual void Draw();
     virtual void Left();
+    virtual void OnFocus();
+    virtual void LoseFocus();
     virtual void ReDraw();
     virtual void Show();
     virtual void Suspend();

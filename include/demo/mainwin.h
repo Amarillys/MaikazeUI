@@ -4,6 +4,7 @@
 
 #include "../core/window.h"
 #include "../core/button.h"
+#include "../core/textbox.h"
 #include "../core/locale.h"
 #include "../core/theme.h"
 
@@ -18,6 +19,7 @@ public:
     Mainwin();
     Button* btn;
     Button* btn2;
+    TextBox* tb;
 
 private:
 };

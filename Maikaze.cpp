@@ -32,7 +32,7 @@ void QuitCursor();
 LocaleFile* lang = new LocaleFile("locale.cfg");
 void InitLanguage();
 
-extern FontSys fsys(cfg->ReadString("Main", "Font"));
+stdstr FONT = cfg->ReadString("Main", "Font");
 
 Mainwin* mw;
 
@@ -51,7 +51,9 @@ int main(int argc, char * argv[])
     //init system end
 
     //event system start
-    SDL_Event evt;
+    SDL_Event evt; 
+    SDL_Thread *thread = SDL_CreateThread(TestThread, "TestThread", (void *)NULL);
+    SDL_DetachThread(thread);  /* will go away on its own upon completion. */
 
     while (true)
     {

@@ -96,6 +96,10 @@ void Win::EvtRec(EVT ievt)
 
         break;
 
+    case MOUSE_DOWN:
+        objmgr[newobj]->OnFocus();
+        break;
+
     case MOUSE_UP:
         objmgr[newobj]->Click();
         break;

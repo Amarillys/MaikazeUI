@@ -7,6 +7,10 @@ Object::Object()
     id = reinterpret_cast<u32>(this);
 }
 
+Object::~Object()
+{
+}
+
 void Object::Click()
 {
     f_click();
@@ -19,6 +23,14 @@ void Object::Draw()
 void Object::Left()
 {
     f_left();
+}
+
+void Object::OnFocus()
+{
+}
+
+void Object::LoseFocus()
+{
 }
 
 void Object::ReDraw()
