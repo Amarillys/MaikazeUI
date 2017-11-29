@@ -1,18 +1,18 @@
 /**/
 #include "../include/core/button.h"
 
-extern FontSys fsys;
+extern stdstr FONT;
 extern Theme DEFTHEME;
 extern LocaleFile* lang;
 extern float ZOOM;
-Button::Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih)
+Button::Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih, int itextsize)
 {
-    Create(iwin, icaption, "", ix, iy, iw, ih);
+    Create(iwin, icaption, "", ix, iy, iw, ih, itextsize);
 }
 
-Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * iname)
+Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * iname, int itextsize)
 {
-    Create(iwin, lang->ReadString(lang->curLang, iname).c_str(), iname, ix, iy, iw, ih);
+    Create(iwin, lang->ReadString(lang->curLang, iname).c_str(), iname, ix, iy, iw, ih, itextsize);
 }
 
 Button::~Button()
@@ -20,24 +20,27 @@ Button::~Button()
     f_click();
 }
 
-void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix, int iy, int iw, int ih)
+void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix, int iy, int iw, int ih, int itextsize)
 {
     Set(iwin);
+    textsize = itextsize;
     w = to0(iw);
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
-    dx = x * ZOOM;
-    dy = y * ZOOM;
-    dw = w * ZOOM;
-    dh = h * ZOOM;
+    dx = static_cast<int>(x * ZOOM);
+    dy = static_cast<int>(y * ZOOM);
+    dw = static_cast<int>(w * ZOOM);
+    dh = static_cast<int>(h * ZOOM);
     name = iname;
     showtext = icaption;
-    sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
+    //sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
+    sur = SDL_CreateRGBSurfaceWithFormat(0, dw, dh, 32, SDL_PIXELFORMAT_RGBA32);
     cs = CONTRARY;
     SwitchCS(cs);
     st = MouseLeft;
     curclr = inclr;
+    font = FONT;
     Draw();
 }
 
@@ -47,13 +50,13 @@ void Button::DrawBg()
     curclr = (st == MouseLeft ? inclr : clr);
     SDL_Rect srect{ 0, 0, dw, dh };
     SDL_Rect drect{ dx, dy, dw, dh };
-    FillCRectSimple(sur, curclr, GetFather()->GetBgColor());
+    FillCRectSimple(sur, curclr, GetFather()->GetBgColor(), 10);
     Refresh(GetFather()->GetRen(), sur, srect, drect);
 }
 
 void Button::DrawFont()
 {
-    fsys.ShowFontAutoPos(showtext.c_str(), dx, dy, dw, dh, GetFather()->GetRen(), fontclr);
+    ShowFontAutoPosCustom(font, textsize, showtext.c_str(), dx, dy, dw, dh, GetFather()->GetRen(), fontclr);
 }
 
 void Button::CheckText()
@@ -79,16 +82,16 @@ void Button::Suspend()
 {
     st = MouseSuspend;
     SetCursor(MOUSE_HAND);
-    Draw();
     f_suspend();
+    Draw();
 }
 
 void Button::Left()
 {
     st = MouseLeft;
     SetCursor(MOUSE_NORMAL);
-    Draw();
     f_left();
+    Draw();
 }
 
 void Button::Hide()
@@ -98,12 +101,15 @@ void Button::Hide()
 
 void Button::ReDraw()
 {
-    dx = x * ZOOM;
-    dy = y * ZOOM;
-    dw = w * ZOOM;
-    dh = h * ZOOM;
+    textsize = (int)(textsize  / (dx * 1.0 / x) * ZOOM);
+    dx = static_cast<int>(x * ZOOM);
+    dy = static_cast<int>(y * ZOOM);
+    dw = static_cast<int>(w * ZOOM);
+    dh = static_cast<int>(h * ZOOM);
     SDL_FreeSurface(sur);
-    sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
+
+    sur = SDL_CreateRGBSurfaceWithFormat(0, dw, dh, 32, SDL_PIXELFORMAT_RGBA32);
+    //sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
 }
 
 void Button::Draw()
@@ -122,7 +128,7 @@ void Button::SwitchCS(CStyle ics)
     case TRANSPARENT:
         inclr = DEFTHEME.WinBg;
         clr = Color{ static_cast<uint8_t>(DEFTHEME.WinBg.r + 10 * addclr), static_cast<uint8_t>(DEFTHEME.WinBg.g + 10 * addclr),
-            static_cast<uint8_t>(DEFTHEME.WinBg.b + 10 * addclr), static_cast<uint8_t>(DEFTHEME.WinBg.a + 10 * addclr) };
+            static_cast<uint8_t>(DEFTHEME.WinBg.b + 10 * addclr), DEFTHEME.WinBg.a };
         fontclr = DEFTHEME.FontColor;
         
         if (DEFTHEME.BtnBg.r == Hikari.BtnBg.r)

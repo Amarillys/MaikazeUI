@@ -11,10 +11,10 @@ TextBox::TextBox(Win* iwin, int ix, int iy, int iw, int ih, bool ishow)
     h = to0(ih);
     x = to0(ix);
     y = to0(iy);
-    dx = (int)x * ZOOM;
-    dy = (int)y * ZOOM;
-    dw = (int)w * ZOOM;
-    dh = (int)h * ZOOM;
+    dx = static_cast<int>(x * ZOOM);
+    dy = static_cast<int>(y * ZOOM);
+    dw = static_cast<int>(w * ZOOM);
+    dh = static_cast<int>(h * ZOOM);
 
     sur = SDL_CreateRGBSurfaceWithFormat(0, dw, dh, 32, SDL_PIXELFORMAT_RGBA32);
     //sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
@@ -42,8 +42,8 @@ void TextBox::OnFocus()
 
 void TextBox::ReDraw()
 {
-    dx = (int)x * ZOOM;
-    dy = (int)y * ZOOM;
-    dw = (int)w * ZOOM;
-    dh = (int)h * ZOOM;
+    dx = static_cast<int>(x * ZOOM);
+    dy = static_cast<int>(y * ZOOM);
+    dw = static_cast<int>(w * ZOOM);
+    dh = static_cast<int>(h * ZOOM);
 }

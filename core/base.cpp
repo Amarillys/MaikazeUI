@@ -119,85 +119,100 @@ void SetCursor(SDL_Cursor * icur)
     SDL_SetCursor(icur);
 }
 
+void copypx_r(uint8_t * opx_dst, uint8_t * ipx_src, size_t ilength)
+{
+    for (size_t i = 0; i < ilength; ++i)
+        for (int c = 0; c < 4; ++c)
+        {/*
+            opx_dst[(ilength - i - 1) * 4 + 0] = ipx_src[i * 4 + 0];
+            opx_dst[(ilength - i - 1) * 4 + 1] = ipx_src[i * 4 + 1];
+            opx_dst[(ilength - i - 1) * 4 + 2] = ipx_src[i * 4 + 2];*/
+            opx_dst[(ilength - i - 1) * 4 + 3] = ipx_src[i * 4 + 3];
+        }
+}
+
+void copypx(uint8_t * opx_dst, uint8_t * ipx_src, size_t ilength)
+{
+    for (size_t i = 0; i < ilength; ++i)
+        for (int c = 0; c < 4; ++c)
+        {/*
+         opx_dst[(ilength - i - 1) * 4 + 0] = ipx_src[i * 4 + 0];
+         opx_dst[(ilength - i - 1) * 4 + 1] = ipx_src[i * 4 + 1];
+         opx_dst[(ilength - i - 1) * 4 + 2] = ipx_src[i * 4 + 2];*/
+            opx_dst[i * 4 + 3] = ipx_src[i * 4 + 3];
+        }
+}
 
 
-void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg)
+/*171128 Rewrite CircleRect Filling Algorithm
+/*Now only support RGBA32*/
+void FillCRectSimple(SDL_Surface* isur, Color irgb, Color ibg, int ir)
 {
     Fill(isur, irgb);
     if (SDL_MUSTLOCK(isur))
         SDL_LockSurface(isur);
-
-    //default RGB
-    int r = 0;
-    int g = 1;
-    int b = 2;
-    if (isur->format->format == SDL_PIXELFORMAT_BGR24)
-    {
-        r = 2;
-        b = 0;
-    }
-    int addclr = ibg.r > irgb.r ? 1 : -1;
-    Color Dark0 = ibg;
-    Color Dark1 = Color{ static_cast<uint8_t>(ibg.r + addclr * 5),
-        static_cast<uint8_t>(ibg.g + addclr * 5),
-        static_cast<uint8_t>(ibg.b + addclr * 5) };
-    Color Dark2 = Color{ static_cast<uint8_t>(ibg.r + addclr * 5),
-        static_cast<uint8_t>(ibg.g + addclr * 5),
-            static_cast<uint8_t>(ibg.b + addclr * 5) };
-    Color Dark3 = Color{ static_cast<uint8_t>(irgb.r + addclr * 5),
-        static_cast<uint8_t>(irgb.g + addclr * 5),
-            static_cast<uint8_t>(irgb.b + addclr * 5) };
-    
     int w = isur->w;
     int h = isur->h;
-    if (isur->h < CircleDevide * 10)
+    //for (int i = 0; i < isur->w * isur->h * 4; i++)
+    //default: fout angle is same.
+    if (ir == 2 || 3 || 4 || 5 || 10)
     {
-        ((uint8_t *)isur->pixels)[Fuck(1, 1, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(w, 1, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(1, h, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(w, h, w) + r] = Dark0.r;
-
-        ((uint8_t *)isur->pixels)[Fuck(1, 1, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(w, 1, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(1, h, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(w, h, w) + g] = Dark0.g;
-            
-        ((uint8_t *)isur->pixels)[Fuck(1, 1, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(w, 1, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(1, h, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(w, h, w) + b] = Dark0.b;
-
-        ((uint8_t *)isur->pixels)[Fuck(2, 1, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(w - 1, 1, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(1, 2, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(w, 2, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(1, h - 1, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(w, h - 1, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(2, h, w) + r] =
-            ((uint8_t *)isur->pixels)[Fuck(w - 1, h, w) + r] = Dark1.r;
-
-        ((uint8_t *)isur->pixels)[Fuck(2, 1, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(w - 1, 1, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(1, 2, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(w, 2, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(1, h - 1, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(w, h - 1, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(2, h, w) + g] =
-            ((uint8_t *)isur->pixels)[Fuck(w - 1, h, w) + g] = Dark1.g;
-
-        ((uint8_t *)isur->pixels)[Fuck(2, 1, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(w - 1, 1, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(1, 2, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(w, 2, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(1, h - 1, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(w, h - 1, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(2, h, w) + b] =
-            ((uint8_t *)isur->pixels)[Fuck(w - 1, h, w) + b] = Dark1.b;
+        switch (ir)
+        {
+        case 2:
+            for (int iy = 0; iy < ir; iy++)
+                for (int ix = 0; ix < ir; ix++)
+                {
+                    ((uint8_t*)isur->pixels)[(iy * w + ix) * 4 + 3] = CR2[iy][ix];
+                }
+            break;
+        case 3:
+            for (int iy = 0; iy < ir; iy++)
+                for (int ix = 0; ix < ir; ix++)
+                {
+                    ((uint8_t*)isur->pixels)[(iy * w + ix) * 4 + 3] = CR3[iy][ix];
+                }
+            break;
+        case 4:
+            for (int iy = 0; iy < ir; iy++)
+                for (int ix = 0; ix < ir; ix++)
+                {
+                    ((uint8_t*)isur->pixels)[(iy * w + ix) * 4 + 3] = CR4[iy][ix];
+                }
+            break;
+        case 5:
+            for (int iy = 0; iy < ir; iy++)
+                for (int ix = 0; ix < ir; ix++)
+                {
+                    ((uint8_t*)isur->pixels)[(iy * w + ix) * 4 + 3] = CR5[iy][ix];
+                }
+            break;
+        case 10:
+            for (int iy = 0; iy < ir; iy++)
+                for (int ix = 0; ix < ir; ix++)
+                {
+                    ((uint8_t*)isur->pixels)[(iy * w + ix) * 4 + 3] = CR10[iy][ix];
+                }
+            break;
+        default:
+            break;
+        }
     }
     else
     {
 
     }
+    //Part2
+    for (int iy = 0; iy < ir; ++iy)
+        copypx_r(&(((uint8_t*)isur->pixels)[((iy + 1) * w - ir) * 4]), &(((uint8_t*)isur->pixels)[iy * w * 4]), ir);
+    //Part3
+    for (int iy = h - 1; iy > h - ir; --iy)
+        copypx(&(((uint8_t*)isur->pixels)[iy * w  * 4]), &(((uint8_t*)isur->pixels)[(h - iy - 1) * w * 4]), ir);
+    //Part4
+    for (int iy = h - 1; iy > h - ir; --iy)
+        copypx(&(((uint8_t*)isur->pixels)[((iy + 1) * w - ir) * 4]), &(((uint8_t*)isur->pixels)[((h - iy) * w - ir)* 4]), ir);
+    //((uint8_t*)isur->pixels)[w * 4 * 2 + 3] = 50;
+
 
 
     if (SDL_MUSTLOCK(isur))

@@ -47,6 +47,7 @@ protected:
     int id;
     stdstr title;
     int x, y, w, h;
+    int dx, dy, dw, dh;
     bool imgbg;
     Color bgcolor;
     vector<Object*> objmgr;

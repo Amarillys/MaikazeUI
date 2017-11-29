@@ -20,28 +20,28 @@ public:
     void Draw();
     void SwitchCS(CStyle ics);
 
-    Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih);
+    Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih, int itextsize);
 
     /*if you prefer read text from config, then you use this construction function.*/
-    Button(Win* iwin, int ix, int iy, int iw, int ih, const char* name);
+    Button(Win* iwin, int ix, int iy, int iw, int ih, const char* name, int itextsize);
     ~Button();
 
     stdstr name;
     stdstr showtext;
     u32 textsize;
-
-    
-
-protected:
-    SDL_Surface* sur;
+    stdstr font;
     Color curclr;
     Color clr;
     Color inclr;
     CStyle cs;
+    
+
+protected:
+    SDL_Surface* sur;
     Color fontclr;
     Status st;
 
-    void Create(Win* iwin, const char* icaption, const char* name, int ix, int iy, int iw, int ih);
+    void Create(Win* iwin, const char* icaption, const char* name, int ix, int iy, int iw, int ih, int itextsize);
     void DrawBg();
     void DrawFont();
     void CheckText();

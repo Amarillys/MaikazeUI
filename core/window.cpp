@@ -37,8 +37,12 @@ void Win::Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags)
     x = to0(ix);
     y = to0(iy);
     title = ititle;
+    dx = static_cast<int>(x * ZOOM);
+    dy = static_cast<int>(y * ZOOM);
+    dw = static_cast<int>(w * ZOOM);
+    dh = static_cast<int>(h * ZOOM);
     
-    win = SDL_CreateWindow(title.c_str(), x * ZOOM, y * ZOOM, w * ZOOM, h * ZOOM, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
+    win = SDL_CreateWindow(title.c_str(), dx, dy, dw, dh, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
     ren = SDL_CreateRenderer(win, -1, 0);
     sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
     id = SDL_GetWindowID(win);
@@ -116,8 +120,8 @@ void Win::ReDraw()
     SDL_DestroyRenderer(ren);
     SDL_DestroyWindow(win);
 
-    int tw = w * ZOOM;
-    int th = h * ZOOM;
+    int tw = static_cast<int>(w * ZOOM);
+    int th = static_cast<int>(h * ZOOM);
     win = SDL_CreateWindow(title.c_str(), x, y, tw, th, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
     ren = SDL_CreateRenderer(win, -1, 0);
     sur = SDL_CreateRGBSurface(0, tw, th, 24, 0, 0, 0, 0);
@@ -152,8 +156,8 @@ void Win::Draw()
 {
     bgcolor = DEFTHEME.WinBg;
     Fill(sur, bgcolor);
-    int tw = w * ZOOM;
-    int th = h * ZOOM;
+    int tw = static_cast<int>(w * ZOOM);
+    int th = static_cast<int>(h * ZOOM);
     Refresh(ren, sur, SDL_Rect{ 0, 0, tw, th}, SDL_Rect{ 0, 0, tw, th });
     for (auto o : objmgr)
         o->Draw();
