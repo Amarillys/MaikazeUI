@@ -5,14 +5,14 @@ extern stdstr FONT;
 extern Theme DEFTHEME;
 extern LocaleFile* lang;
 extern float ZOOM;
-Button::Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih, int itextsize)
+Button::Button(Win* iwin, const char* icaption, int ix, int iy, int iw, int ih, int itextsize, bool ishow)
 {
-    Create(iwin, icaption, "", ix, iy, iw, ih, itextsize);
+    Create(iwin, icaption, "", ix, iy, iw, ih, itextsize, 0, ishow);
 }
 
-Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * iname, int itextsize)
+Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * iname, int itextsize, bool ishow)
 {
-    Create(iwin, lang->ReadString(lang->curLang, iname).c_str(), iname, ix, iy, iw, ih, itextsize);
+    Create(iwin, lang->ReadString(lang->curLang, iname).c_str(), iname, ix, iy, iw, ih, itextsize, 0, ishow);
 }
 
 Button::~Button()
@@ -20,7 +20,7 @@ Button::~Button()
     f_click();
 }
 
-void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix, int iy, int iw, int ih, int itextsize)
+void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix, int iy, int iw, int ih, int itextsize, int icr,bool ishow)
 {
     Set(iwin);
     textsize = itextsize;
@@ -41,7 +41,8 @@ void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix
     st = MouseLeft;
     curclr = inclr;
     font = FONT;
-    Draw();
+    if (ishow)
+        Draw();
 }
 
 void Button::DrawBg()
@@ -50,7 +51,7 @@ void Button::DrawBg()
     curclr = (st == MouseLeft ? inclr : clr);
     SDL_Rect srect{ 0, 0, dw, dh };
     SDL_Rect drect{ dx, dy, dw, dh };
-    FillCRectSimple(sur, curclr, GetFather()->GetBgColor(), 10);
+    FillCRectSimple(sur, curclr, cr);
     Refresh(GetFather()->GetRen(), sur, srect, drect);
 }
 

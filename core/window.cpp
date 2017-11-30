@@ -44,7 +44,7 @@ void Win::Create(stdstr ititle, int iw, int ih, int ix, int iy, u32 iflags)
     
     win = SDL_CreateWindow(title.c_str(), dx, dy, dw, dh, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
     ren = SDL_CreateRenderer(win, -1, 0);
-    sur = SDL_CreateRGBSurface(0, w, h, 24, 0, 0, 0, 0);
+    sur = SDL_CreateRGBSurfaceWithFormat(0, w, h, 32, SDL_PIXELFORMAT_RGBA32);
     id = SDL_GetWindowID(win);
 
     //set the window as the base object
@@ -124,7 +124,7 @@ void Win::ReDraw()
     int th = static_cast<int>(h * ZOOM);
     win = SDL_CreateWindow(title.c_str(), x, y, tw, th, SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
     ren = SDL_CreateRenderer(win, -1, 0);
-    sur = SDL_CreateRGBSurface(0, tw, th, 24, 0, 0, 0, 0);
+    sur = SDL_CreateRGBSurfaceWithFormat(0, tw, th, 32, SDL_PIXELFORMAT_RGBA32);
     id = SDL_GetWindowID(win);
 
     for (auto o : objmgr)
