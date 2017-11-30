@@ -7,6 +7,8 @@
 #include <fstream>
 
 void ShowFontAutoPosCustom(stdstr ifont, int isize, const char* istr, int ix, int iy, int iw, int ih, SDL_Renderer * iren, SDL_Color iclr);
+void ShowFontCustom(stdstr ifont, int isize, const char* istr, int ix, int iy, SDL_Renderer * iren, SDL_Color iclr);
+void ShowFont(int isize, const char* istr, int ix, int iy, SDL_Renderer * iren, SDL_Color iclr);
 
 class FontSys
 {

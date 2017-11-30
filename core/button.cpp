@@ -17,7 +17,8 @@ Button::Button(Win * iwin, int ix, int iy, int iw, int ih, const char * iname, i
 
 Button::~Button()
 {
-    f_click();
+    if (sur != nullptr)
+        SDL_FreeSurface(sur);
 }
 
 void Button::Create(Win* iwin, const char * icaption, const char * iname, int ix, int iy, int iw, int ih, int itextsize, int icr,bool ishow)
@@ -110,7 +111,6 @@ void Button::ReDraw()
     SDL_FreeSurface(sur);
 
     sur = SDL_CreateRGBSurfaceWithFormat(0, dw, dh, 32, SDL_PIXELFORMAT_RGBA32);
-    //sur = SDL_CreateRGBSurface(0, dw, dh, 24, 0, 0, 0, 0);
 }
 
 void Button::Draw()
