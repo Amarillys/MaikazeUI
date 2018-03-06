@@ -15,13 +15,13 @@ Mainwin::Mainwin(): Win("MaikazeUI", 640, 480)
     btn->Draw();
     Add(btn);
 
-    btn2 = new Button(this, u8"哈哈", 328, 328, 160, 50, 24, true);
+    btn2 = new Button(this, u8"计时", 328, 328, 300, 60, 24, true);
     btn2->SwitchCS(TRANSPARENT);
-    btn2->Draw();^^
+    btn2->Draw();
     btn2->f_click = []() 
     {
         DEFTHEME = DK;
-        mw->btn->font = "c:/windows/fonts/consola.ttf";
+        mw->btn->font = "c:/windows/fonts/msyh.ttc";
         mw->Draw();
         ZOOM = 1.0;
         mw->ReDraw();
@@ -33,8 +33,22 @@ Mainwin::Mainwin(): Win("MaikazeUI", 640, 480)
     };
     Add(btn2);
 
+    btn3 = new Button(this, u8"退出", 128, 408, 160, 50, 24, true);
+    btn3->SwitchCS(TRANSPARENT);
+    btn3->Draw();
+    btn3->f_click = []()
+    {
+        exit(0);
+    };
+    Add(btn3);
+
     tb = new TextBox(this, 100, 200, 300, 40, true);
     Add(tb);
+
+    testlbl = new Label(this, u8"中文", 30, 50, 50, 200, 70, true);
+    testlbl_lang = new Label(this, 30, "testlbl_lang", 300, 100, 300, 60, true);
+    Add(testlbl);
+    Add(testlbl_lang);
 }
 
 

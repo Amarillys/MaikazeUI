@@ -48,6 +48,7 @@ enum Status
     MouseLeft
 };
 
+/*the sample alpha bitmap of Circle Rect*/
 const uint8_t CR[5][10][10] = {{{ 75, 228}, { 228, 255}}, 
                                {{  0, 107, 224}, { 107, 255, 255}, { 224, 255, 255}},
                                {{  0,  51, 173, 222}, { 51, 217, 255, 255}, { 173, 255, 255, 255}, { 217, 255, 255, 255}},
@@ -117,5 +118,4 @@ void SetCursor(SDL_Cursor* icur);
 /*the length's unit based on a pixel, one length = one pixel = 4bit(RGBA)*/
 void copypx_r(uint8_t* opx_dst, uint8_t* ipx_src, size_t ilength);
 void copypx(uint8_t* opx_dst, uint8_t* ipx_src, size_t ilength);
-int TestThread(void *ptr);
 #endif // !MKZ_INIT_H_

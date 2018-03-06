@@ -84,20 +84,23 @@
     <ClCompile Include="core\font.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
-    <ClCompile Include="demo\mainwin.cpp">
-      <Filter>源文件\Demo</Filter>
-    </ClCompile>
     <ClCompile Include="core\event.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
     <ClCompile Include="core\config.cpp">
       <Filter>源文件\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Maikaze.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="core\locale.cpp">
       <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="core\text.cpp">
+      <Filter>源文件\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="demo\mainwin.cpp">
+      <Filter>源文件\Demo</Filter>
+    </ClCompile>
+    <ClCompile Include="Maikaze.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="include\core\locale.h">
       <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\core\text.h">
+      <Filter>头文件\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="error_code.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

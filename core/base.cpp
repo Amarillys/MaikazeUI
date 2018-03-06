@@ -146,8 +146,3 @@ void FillCRectSimple(SDL_Surface* isur, Color irgb, int ir)
     if (SDL_MUSTLOCK(isur))
         SDL_UnlockSurface(isur);
 }
-
-int TestThread(void *ptr)
-{
-    return 56;
-}

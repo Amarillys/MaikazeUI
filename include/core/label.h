@@ -2,7 +2,7 @@
 #ifndef _MAIKAZE_LABEL_H_
 #define _MAIKAZE_LABEL_H_
 
-#include "object.h"
+#include "text.h"
 #include "locale.h"
 #include "font.h"
 #include "theme.h"
@@ -17,6 +17,11 @@ public:
     void Draw();
     void ReDraw();
 
+    //
+
+    bool chosen;
+    bool wrap;
+    int style;
     Color clr;
     Color textclr;
     stdstr name;

@@ -20,6 +20,7 @@ public:
     Mainwin();
     Button* btn;
     Button* btn2;
+    Button* btn3;
     Label *testlbl;
     Label *testlbl_lang;
     TextBox* tb;

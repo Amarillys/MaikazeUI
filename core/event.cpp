@@ -19,11 +19,11 @@ EVT evttf(SDL_Event * ievt)
         break;
 
     case SDL_MOUSEBUTTONDOWN:
-        ret.type = MOUSE_DOWN;
+        ret.type = MOUSE_LDOWN;
         break;
 
     case SDL_MOUSEBUTTONUP:
-        ret.type = MOUSE_UP;
+        ret.type = MOUSE_LUP;
         break;
 
     default:

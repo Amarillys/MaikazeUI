@@ -1,5 +1,5 @@
 #include "include\demo\mainwin.h"
-
+#include "include\core\process.h"
 #include <fstream>
 
 //window system
@@ -49,11 +49,10 @@ int main(int argc, char * argv[])
     mw = new Mainwin();
     winmgr.push_back(mw);
     //init system end
-
     //event system start
-    SDL_Event evt; 
-    SDL_Thread *thread = SDL_CreateThread(TestThread, "TestThread", (void *)NULL);
-    SDL_DetachThread(thread);  /* will go away on its own upon completion. */
+    SDL_Event evt;
+    SDL_Thread *thread = SDL_CreateThread(TestThread, "TestThread", (void*)(mw->btn2));
+    //SDL_DetachThread(thread);  /* will go away on its own upon completion. */
 
     while (true)
     {
@@ -61,6 +60,7 @@ int main(int argc, char * argv[])
 
         if (SDL_PollEvent(&evt))
             winmgr[FindWin(evt.motion.windowID)]->EvtRec(evttf(&evt));
+
     }
     //event system end
 

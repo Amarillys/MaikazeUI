@@ -161,12 +161,14 @@
     <ClCompile Include="core\process.cpp" />
     <ClCompile Include="core\slider.cpp" />
     <ClCompile Include="core\status.cpp" />
+    <ClCompile Include="core\text.cpp" />
     <ClCompile Include="core\textbox.cpp" />
     <ClCompile Include="core\window.cpp" />
     <ClCompile Include="Maikaze.cpp" />
     <ClCompile Include="demo\mainwin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="error_code.h" />
     <ClInclude Include="include\core\ask.h" />
     <ClInclude Include="include\core\button.h" />
     <ClInclude Include="include\core\check.h" />
@@ -186,6 +188,7 @@
     <ClInclude Include="include\core\process.h" />
     <ClInclude Include="include\core\slider.h" />
     <ClInclude Include="include\core\status.h" />
+    <ClInclude Include="include\core\text.h" />
     <ClInclude Include="include\core\textbox.h" />
     <ClInclude Include="include\core\theme.h" />
     <ClInclude Include="include\core\window.h" />

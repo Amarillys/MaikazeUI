@@ -15,12 +15,21 @@ void ShowFontAutoPosCustom(stdstr ifont, int isize, const char * istr, int ix, i
     if (font == NULL)
     {
         fprintf(stderr, "font open failure %s\n", SDL_GetError());
-        exit(-1);
+        exit(-101);
     }
+
     SDL_Surface* fsur = TTF_RenderUTF8_Blended(font, istr, iclr);
+    if (fsur == NULL)
+    {
+        fprintf(stderr, "failed to create font: %s : %s\n", istr, SDL_GetError());
+        TTF_CloseFont(font);
+        return;
+    }
     Refresh(iren, fsur, SDL_Rect{ 0, 0, fsur->w, fsur->h }, SDL_Rect{ to0(ix + (iw - fsur->w) / 2), to0(iy + (ih - fsur->h) / 2), fsur->w, fsur->h });
     SDL_FreeSurface(fsur);
     TTF_CloseFont(font);
+    //delete fsur;
+    //delete font;
 }
 
 void ShowFontCustom(stdstr ifont, int isize, const char * istr, int ix, int iy, SDL_Renderer * iren, SDL_Color iclr)
